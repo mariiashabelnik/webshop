@@ -21,7 +21,6 @@ function Products() {
 
   return (
     <div>
-      Products
       <Grid container spacing={2}>
         {productUI}
       </Grid>

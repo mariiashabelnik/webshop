@@ -22,16 +22,16 @@ function Product({ title, image, price, id }) {
   };
 
   const addToCart = () => {
-    if (cart.has(id)) {
+    const newCart = new Map(cart);
+    if (newCart.has(id)) {
       // we have already this item in cart
-      const currentQty = cart.get(id);
-      cart.set(id, currentQty + qty);
+      const currentQty = newCart.get(id);
+      newCart.set(id, currentQty + qty);
     } else {
       // we dont have this item in cart
-      cart.set(id, qty);
+      newCart.set(id, qty);
     }
-    setCartState(cart);
-    console.log("Add to cart");
+    setCartState(newCart);
   };
 
   const maxTitleLength = 18;

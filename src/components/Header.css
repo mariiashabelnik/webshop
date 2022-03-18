@@ -1,3 +1,11 @@
+.nav a {
+  color: aliceblue;
+}
+
+.nav a:hover {
+  color: rgb(0, 4, 109);
+}
+
 .nav {
-  height: 3em;
+  margin-bottom: 3em;
 }
