@@ -64,7 +64,6 @@ export const cartInfo = selector({
     let totalQty = 0;
     const shoppingCart = [];
     for (const [productId, qty] of cartList) {
-      console.log(productId, qty);
       totalQty += qty;
       const productInfo = productList.find((item) => item.id === productId);
       totalPrice += productInfo.price * qty;

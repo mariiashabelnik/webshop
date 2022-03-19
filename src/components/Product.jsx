@@ -45,7 +45,7 @@ function Product({ title, image, price, id }) {
         <CardMedia component="img" height="140" image={image} alt={title} />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div">
-            {title}
+            <Link to={"/product/" + id}>{title}</Link>
           </Typography>
 
           <Typography variant="h6" color="text.secondary">

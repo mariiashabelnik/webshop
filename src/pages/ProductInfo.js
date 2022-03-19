@@ -5,14 +5,8 @@ import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import "./ProductInfo.css";
-import {
-  Paper,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-} from "@mui/material";
+import { Paper, FormControl, Select, MenuItem, Button } from "@mui/material";
+import { Helmet } from "react-helmet";
 
 function ProductInfo() {
   const params = useParams();
@@ -45,6 +39,9 @@ function ProductInfo() {
 
   return (
     <div>
+      <Helmet>
+        <title>Mariia webshop - {productInfo.title || ""}</title>
+      </Helmet>
       <Paper elevation={4}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>

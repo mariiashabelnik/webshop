@@ -20,13 +20,19 @@ import { cartInfo } from "../store/index";
 import BallotIcon from "@mui/icons-material/Ballot";
 
 function Header() {
+  const [, setAnchorEl] = React.useState(null);
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { totalPrice, totalQty } = useRecoilValue(cartInfo);
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -50,7 +56,7 @@ function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={handleMenuClose}>
         <IconButton size="large" color="inherit">
           <BallotIcon />
         </IconButton>
@@ -59,7 +65,7 @@ function Header() {
         </Link>
       </MenuItem>
 
-      <MenuItem>
+      <MenuItem onClick={handleMenuClose}>
         <IconButton size="large" aria-label={totalQty} color="inherit">
           <Badge badgeContent={totalQty} color="error">
             <ShoppingIcon />

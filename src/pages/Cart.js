@@ -5,13 +5,12 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-
+import { Link } from "@mui/material";
 import "./Cart.css";
 
 function Cart() {
-  const { totalPrice, shoppingCart } = useRecoilValue(cartInfo);
+  const { totalPrice, shoppingCart, totalQty } = useRecoilValue(cartInfo);
   const [cart, setCartState] = useRecoilState(cartState);
-  console.log(cart);
 
   const addQty = (productId, count) => {
     const newCart = new Map(cart);
@@ -33,7 +32,9 @@ function Cart() {
       <div key={item.productId}>
         <Grid container spacing={0}>
           <Grid item xs={12} sm={4}>
-            <img className="cartImg" src={item.image} alt={item.title} />
+            <Link to={"/product/" + item.productId}>
+              <img className="cartImg" src={item.image} alt={item.title} />
+            </Link>
           </Grid>
           <Grid item xs={12} sm={8}>
             <Typography variant="subtitle1" component="div">
@@ -87,13 +88,18 @@ function Cart() {
   return (
     <div>
       <Paper elevation={4}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} pb={2}>
           <Grid item xs={12} sm={6}>
             <div>{shoppingUi}</div>
           </Grid>
           <Grid item xs={12} sm={6}>
             <div>
-              <Typography variant="subtitle1">€ {totalPrice}</Typography>
+              <Typography variant="subtitle1">Shipping: free</Typography>
+              <Typography variant="subtitle1">Items: {totalQty}</Typography>
+
+              <Typography variant="subtitle1">Total: € {totalPrice}</Typography>
+
+              <Button variant="contained">Check out</Button>
             </div>
           </Grid>
         </Grid>
