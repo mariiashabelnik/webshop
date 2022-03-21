@@ -71,5 +71,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Link
 
-This is link to my first store: [https://monumental-granita-0ec5dc.netlify.app/]
+This is link to my first store: <https://monumental-granita-0ec5dc.netlify.app/>
 
