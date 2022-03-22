@@ -19,6 +19,8 @@ import { useRecoilValue } from "recoil";
 import { cartInfo } from "../store/index";
 import BallotIcon from "@mui/icons-material/Ballot";
 
+import StorefrontIcon from "@mui/icons-material/Storefront";
+
 function Header() {
   const [, setAnchorEl] = React.useState(null);
 
@@ -82,15 +84,19 @@ function Header() {
     <Box className="nav" sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Button color="inherit" size="large">
-            <Link to="/">Webshop</Link>
-          </Button>
+          <IconButton color="inherit" size="large">
+            <Link to="/">
+              <StorefrontIcon fontSize="medium" />
+              Webshop
+            </Link>
+          </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button color="inherit">
               <Link to="/products">Products</Link>
             </Button>
+
             <IconButton size="large" aria-label={totalQty} color="inherit">
               <Badge badgeContent={totalQty} color="error">
                 <Link to="/cart">
@@ -98,6 +104,7 @@ function Header() {
                 </Link>
               </Badge>
             </IconButton>
+
             <Button color="inherit">
               <Link to="/cart">
                 Total <br />€ {totalPrice}
