@@ -1,14 +1,19 @@
 .footer {
-    background-color: #1976d1;
-    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-    text-align: center;
-    margin: auto;
-    justify-content: center;
-    right: 0px;
-    padding: 40px;
-    color: rgb(232, 232, 232);
+  background-color: #1976d1;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  text-align: center;
+  justify-content: center;
+  color: rgb(232, 232, 232);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 1em;
+  z-index: 10;
 }
 
 .footer p {
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }

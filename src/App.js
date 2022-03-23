@@ -14,8 +14,8 @@ function App() {
       <Helmet>
         <title>Mariia webshop</title>
       </Helmet>
-      <Container maxWidth="lg">
-        <Header />
+      <Header />
+      <Container maxWidth="lg" className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />

@@ -59,7 +59,7 @@ function Product({ title, image, price, id }) {
           </Link>
 
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Quantity</InputLabel>
+            <InputLabel id="demo-simple-select-label" className="myLabel">Quantity</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"

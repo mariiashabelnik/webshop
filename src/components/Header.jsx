@@ -84,12 +84,11 @@ function Header() {
     <Box className="nav" sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton color="inherit" size="large">
+          <Button color="inherit" size="large" startIcon={<StorefrontIcon />} variant="string">
             <Link to="/">
-              <StorefrontIcon fontSize="medium" />
               Webshop
             </Link>
-          </IconButton>
+          </Button>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
