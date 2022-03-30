@@ -1,5 +1,4 @@
 import { atom, selector } from "recoil";
-import rawProductList from "./products.json";
 
 // save in localstorage
 const localStorageEffectMap =
@@ -24,10 +23,29 @@ const localStorageEffectMap =
     });
   };
 
+// fetch products from API
+async function getProducts() {
+  const response = await fetch("https://k4backend.osuka.dev/products");
+  const data = await response.json();
+
+  return data;
+}
+
+// run getProducts when atom effect is triggered
+const loadProductEffect =
+  () =>
+  async ({ setSelf, trigger }) => {
+    if (trigger === "get") {
+      const data = await getProducts();
+      setSelf(data);
+    }
+  };
+
 // list of all products
 export const products = atom({
   key: "productState",
-  default: rawProductList,
+  default: [],
+  effects: [loadProductEffect()],
 });
 
 // set current product to view
@@ -65,7 +83,11 @@ export const cartInfo = selector({
     const shoppingCart = [];
     for (const [productId, qty] of cartList) {
       totalQty += qty;
-      const productInfo = productList.find((item) => item.id === productId);
+      const productInfo = productList.find((item) => item.id === productId) || {
+        price: 0,
+        title: "",
+        image: "",
+      };
       totalPrice += productInfo.price * qty;
       shoppingCart.push({
         productId,
