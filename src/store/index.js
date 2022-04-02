@@ -1,25 +1,20 @@
+//här ligger selectorer och atomer = Recoil
+
 import { atom, selector } from "recoil";
 
 // save in localstorage
-const localStorageEffectMap =
+const localStorageEffect =
   (key) =>
   ({ setSelf, onSet }) => {
     const savedValue = localStorage.getItem(key);
-    // take out text from localstorage
     if (savedValue != null) {
-      // we have localestorage, convert the text into a Map
-      setSelf(new Map(JSON.parse(savedValue)));
+      setSelf(JSON.parse(savedValue));
     }
 
     onSet((newValue, _, isReset) => {
-      // new data is set lets store it in localstorage but first
-      // convert data in map into a json string
       isReset
         ? localStorage.removeItem(key)
-        : localStorage.setItem(
-            key,
-            JSON.stringify(Array.from(newValue.entries()))
-          );
+        : localStorage.setItem(key, JSON.stringify(newValue));
     });
   };
 
@@ -75,8 +70,8 @@ export const currentProduct = selector({
 
 export const cartState = atom({
   key: "cartState", // unique ID (with respect to other atoms/selectors)
-  default: new Map(), // default value (aka initial value)
-  effects: [localStorageEffectMap("cart")],
+  default: {}, // default value (aka initial value)
+  effects: [localStorageEffect("usercart")],
 });
 
 export const cartInfo = selector({
@@ -88,13 +83,16 @@ export const cartInfo = selector({
     let totalPrice = 0;
     let totalQty = 0;
     const shoppingCart = [];
-    for (const [productId, qty] of cartList) {
+    for (const [productId, qty] of Object.entries(cartList)) {
       totalQty += qty;
-      const productInfo = productList.find((item) => item.id === productId) || {
+      const productInfo = productList.find(
+        (item) => item.id === parseInt(productId, 10)
+      ) || {
         price: 0,
         title: "",
         image: "",
       };
+
       totalPrice += productInfo.price * qty;
       shoppingCart.push({
         productId,

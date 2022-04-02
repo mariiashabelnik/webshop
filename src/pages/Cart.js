@@ -12,21 +12,22 @@ function Cart() {
   const { totalPrice, shoppingCart, totalQty } = useRecoilValue(cartInfo);
   const [cart, setCartState] = useRecoilState(cartState);
 
-  const addQty = (productId, count) => {
-    const newCart = new Map(cart);
-    const currentQty = newCart.get(productId);
+  const addQty = (id, count) => {
+    const newCart = { ...cart };
+    const currentQty = newCart[id];
     const nextQty = currentQty + count;
     if (nextQty > 0) {
-      newCart.set(productId, nextQty);
+      newCart[id] = nextQty;
       setCartState(newCart);
     }
   };
 
   const remove = (productId) => {
-    const newCart = new Map(cart);
-    newCart.delete(productId);
+    const newCart = { ...cart };
+    delete newCart[productId];
     setCartState(newCart);
   };
+
   const shoppingUi = shoppingCart.map((item) => {
     return (
       <div key={item.productId}>
@@ -96,9 +97,7 @@ function Cart() {
             <div>
               <Typography variant="subtitle1">Shipping: free</Typography>
               <Typography variant="subtitle1">Items: {totalQty}</Typography>
-
               <Typography variant="subtitle1">Total: € {totalPrice}</Typography>
-
               <Button variant="contained">Check out</Button>
             </div>
           </Grid>

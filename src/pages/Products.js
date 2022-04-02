@@ -6,7 +6,6 @@ import { Helmet } from "react-helmet";
 
 function Products() {
   const productList = useRecoilValue(products);
-  console.log("productList", productList);
 
   const productUI = productList.map((item) => {
     return (

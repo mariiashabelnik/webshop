@@ -22,15 +22,13 @@ function Product({ title, image, price, id }) {
   };
 
   const addToCart = () => {
-    const newCart = new Map(cart);
-    if (newCart.has(id)) {
-      // we have already this item in cart
-      const currentQty = newCart.get(id);
-      newCart.set(id, currentQty + qty);
-    } else {
-      // we dont have this item in cart
-      newCart.set(id, qty);
+    const newCart = { ...cart };
+
+    if (newCart[id] === undefined) {
+      newCart[id] = 0;
     }
+    newCart[id] += qty;
+
     setCartState(newCart);
   };
 
@@ -59,7 +57,9 @@ function Product({ title, image, price, id }) {
           </Link>
 
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" className="myLabel">Quantity</InputLabel>
+            <InputLabel id="demo-simple-select-label" className="myLabel">
+              Quantity
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
