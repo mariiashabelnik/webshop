@@ -48,6 +48,13 @@ export const products = atom({
   effects: [loadProductEffect()],
 });
 
+// user information
+export const userInformation = atom({
+  key: "userInformation",
+  default: {},
+  effects: [localStorageEffect("userInformation")],
+});
+
 // set current product to view
 export const currentProductId = atom({
   key: "currentProductId",

@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
@@ -7,6 +8,7 @@ import Footer from "./components/Footer";
 import Container from "@mui/material/Container";
 import ProductInfo from "./pages/ProductInfo";
 import { Helmet } from "react-helmet";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
       <Container maxWidth="lg" className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/products" element={<Products />} />
           <Route path="/product/:productId" element={<ProductInfo />} />
