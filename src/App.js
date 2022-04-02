@@ -9,6 +9,8 @@ import Container from "@mui/material/Container";
 import ProductInfo from "./pages/ProductInfo";
 import { Helmet } from "react-helmet";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/products" element={<Products />} />
           <Route path="/product/:productId" element={<ProductInfo />} />

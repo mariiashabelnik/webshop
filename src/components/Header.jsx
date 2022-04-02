@@ -16,7 +16,7 @@ import ShoppingIcon from "@mui/icons-material/ShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
 import { useRecoilValue } from "recoil";
-import { cartInfo } from "../store/index";
+import { cartInfo, userInformation } from "../store/index";
 import BallotIcon from "@mui/icons-material/Ballot";
 
 import StorefrontIcon from "@mui/icons-material/Storefront";
@@ -26,6 +26,8 @@ function Header() {
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { totalPrice, totalQty } = useRecoilValue(cartInfo);
+  const userInfo = useRecoilValue(userInformation);
+  console.log(userInfo);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => {
@@ -84,16 +86,22 @@ function Header() {
     <Box className="nav" sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Button color="inherit" size="large" startIcon={<StorefrontIcon />} variant="string">
-            <Link to="/">
-              Webshop
-            </Link>
+          <Button
+            color="inherit"
+            size="large"
+            startIcon={<StorefrontIcon />}
+            variant="string"
+          >
+            <Link to="/">Webshop</Link>
           </Button>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button color="inherit">
               <Link to="/products">Products</Link>
+            </Button>
+            <Button color="inherit">
+              <Link to="/login"> {userInfo.id ? "Profile" : "Login"}</Link>
             </Button>
 
             <IconButton size="large" aria-label={totalQty} color="inherit">

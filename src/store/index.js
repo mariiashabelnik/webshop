@@ -47,6 +47,8 @@ export const products = atom({
 export const userInformation = atom({
   key: "userInformation",
   default: {},
+
+  //set info i browser
   effects: [localStorageEffect("userInformation")],
 });
 

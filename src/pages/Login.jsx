@@ -5,16 +5,42 @@ import { Helmet } from "react-helmet";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [username, setUsername] = useState("MariiaSh");
-  const [password, setPassword] = useState("m38rmF$");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [userInfo, setUserInfo] = useRecoilState(userInformation);
-  console.log(userInfo);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("use effect", userInfo);
+    if (userInfo.id) {
+      // we have user information
+      navigate("/profile");
+    }
+  }, [userInfo, navigate]);
+
+  //if user successfull login get more info
+  const getUserInformation = async (userId) => {
+    console.log("get user information");
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    try {
+      const response = await fetch(
+        "https://k4backend.osuka.dev/users/" + userId,
+        requestOptions
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {}
+  };
 
   const login = async () => {
-    /* copy from Postman/API*/
+    // copy from Postman/API
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -36,7 +62,10 @@ function Login() {
       );
       const data = await response.json();
       setErrorMessage("");
-      setUserInfo(data);
+
+      const userInfo = await getUserInformation(data.userId);
+
+      setUserInfo(userInfo);
     } catch (error) {
       setErrorMessage("Bad login credentials");
     }
@@ -51,6 +80,7 @@ function Login() {
       <Paper elevation={4}>
         {/*name imput*/}
         <TextField
+          label="Username"
           size="small"
           value={username}
           onChange={(e) => {
@@ -61,6 +91,7 @@ function Login() {
 
         {/*password imput*/}
         <TextField
+          label="Password"
           size="small"
           type="password"
           value={password}
@@ -80,6 +111,16 @@ function Login() {
           login
         </Button>
 
+        <Button
+          onClick={() => {
+            navigate("/signup");
+          }}
+          variant="contained"
+        >
+          Signup
+        </Button>
+
+        {/* if a name or/and password is wrong */}
         {errorMessage}
       </Paper>
     </div>
