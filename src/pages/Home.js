@@ -5,7 +5,7 @@ function Home() {
   return (
     <div>
       <Helmet>
-        <title>Mariia webshop - Home</title>
+        <title>Webshop - Home</title>
       </Helmet>
 
       <div className="shopping">

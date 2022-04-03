@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-
 import { Helmet } from "react-helmet";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { FormGroup, Grid, Typography } from "@mui/material";
+
 import { useNavigate } from "react-router-dom";
+
+//mui import
+import {
+  FormGroup,
+  Grid,
+  Typography,
+  Paper,
+  TextField,
+  Button,
+} from "@mui/material";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -67,7 +73,7 @@ function SignUp() {
   return (
     <div>
       <Helmet>
-        <title>Mariia webshop - Signup</title>
+        <title>Webshop - Signup</title>
       </Helmet>
 
       <Paper elevation={4}>

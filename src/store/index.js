@@ -36,20 +36,56 @@ const loadProductEffect =
     }
   };
 
-// list of all products
+// atom-list of all products
 export const products = atom({
   key: "productState",
   default: [],
   effects: [loadProductEffect()],
 });
 
+// fetch products from API
+async function getAllUsers() {
+  const response = await fetch("https://k4backend.osuka.dev/users");
+  const data = await response.json();
+
+  return data;
+}
+
+// run getProducts when atom effect is triggered
+const loadAllUsersEffect =
+  () =>
+  async ({ setSelf, trigger }) => {
+    if (trigger === "get") {
+      const data = await getAllUsers();
+      setSelf(data);
+    }
+  };
+
+// atom-list of all products
+export const allUsers = atom({
+  key: "allUsers",
+  default: [],
+  effects: [loadAllUsersEffect()],
+});
+
 // user information
 export const userInformation = atom({
   key: "userInformation",
   default: {},
-
   //set info i browser
   effects: [localStorageEffect("userInformation")],
+});
+
+export const isAdmin = selector({
+  key: "isAdmin",
+  get: ({ get }) => {
+    const userInfo = get(userInformation);
+    if (userInfo.role === "admin") {
+      return true;
+    } else {
+      return false;
+    }
+  },
 });
 
 // set current product to view

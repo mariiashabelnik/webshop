@@ -2,10 +2,18 @@ import React, { useEffect, useState } from "react";
 import { userInformation } from "../store/index";
 import { useRecoilState } from "recoil";
 import { Helmet } from "react-helmet";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+//mui import
+import {
+  FormGroup,
+  Grid,
+  Typography,
+  Paper,
+  TextField,
+  Button,
+} from "@mui/material";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -18,7 +26,7 @@ function Login() {
     console.log("use effect", userInfo);
     if (userInfo.id) {
       // we have user information
-      navigate("/profile");
+      navigate("/products");
     }
   }, [userInfo, navigate]);
 
@@ -74,52 +82,62 @@ function Login() {
   return (
     <div>
       <Helmet>
-        <title>Mariia webshop - Home</title>
+        <title>Webshop - Login</title>
       </Helmet>
 
-      <Paper elevation={4}>
-        {/*name imput*/}
-        <TextField
-          label="Username"
-          size="small"
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-          variant="outlined"
-        />
-
-        {/*password imput*/}
-        <TextField
-          label="Password"
-          size="small"
-          type="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          variant="outlined"
-        />
-
-        {/*button for login*/}
-        <Button
-          onClick={() => {
-            login();
-          }}
-          variant="contained"
-        >
-          login
-        </Button>
-
-        <Button
-          onClick={() => {
-            navigate("/signup");
-          }}
-          variant="contained"
-        >
-          Signup
-        </Button>
-
+      <Paper elevation={4} sm={{ width: "100%" }} xs={{ width: "100%" }}>
+        <Typography variant="h5" pl={2} pr={2} pt={2}>
+          Please LogIn
+        </Typography>
+        <FormGroup>
+          <Grid container spacing={2} padding={2}>
+            {/*name imput*/}
+            <Grid item xs={12} md={12}>
+              <TextField
+                fullWidth
+                label="Username"
+                size="small"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+                variant="outlined"
+              />
+            </Grid>
+            {/*password imput*/}
+            <Grid item xs={12} md={12}>
+              <TextField
+                fullWidth
+                label="Password"
+                size="small"
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                variant="outlined"
+              />
+            </Grid>
+            {/*button for login*/}
+            {/* button for signup*/}
+            <Grid item xs={12} md={12}>
+              <Typography variant="subtitle1">
+                Create new account? <Link to="/signup">Sign up</Link>
+              </Typography>
+            </Grid>{" "}
+            <Grid item xs={12} md={12}>
+              <Button
+                fullWidth
+                onClick={() => {
+                  login();
+                }}
+                variant="contained"
+              >
+                login
+              </Button>
+            </Grid>
+          </Grid>{" "}
+        </FormGroup>
         {/* if a name or/and password is wrong */}
         {errorMessage}
       </Paper>

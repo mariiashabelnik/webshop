@@ -1,8 +1,10 @@
 import { useRecoilValue } from "recoil";
 import { products } from "../store/index";
 import Product from "../components/Product";
-import Grid from "@mui/material/Grid";
 import { Helmet } from "react-helmet";
+
+//mui import
+import Grid from "@mui/material/Grid";
 
 function Products() {
   const productList = useRecoilValue(products);
@@ -23,7 +25,7 @@ function Products() {
   return (
     <div>
       <Helmet>
-        <title>Mariia webshop - Products</title>
+        <title>Webshop - Products</title>
       </Helmet>
       <Grid container spacing={2}>
         {productUI}

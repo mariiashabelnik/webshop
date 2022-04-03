@@ -2,11 +2,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { currentProductId, currentProduct, cartState } from "../store/index";
 import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import "./ProductInfo.css";
-import { Paper, FormControl, Select, MenuItem, Button } from "@mui/material";
 import { Helmet } from "react-helmet";
+
+//mui import
+import {
+  Paper,
+  FormControl,
+  Select,
+  MenuItem,
+  Button,
+  Grid,
+  Typography,
+} from "@mui/material";
 
 function ProductInfo() {
   const params = useParams();
@@ -20,15 +28,13 @@ function ProductInfo() {
   const id = parseInt(params.productId, 10);
 
   const addToCart = () => {
-    const newCart = new Map(cart);
-    if (newCart.has(id)) {
-      // we have already this item in cart
-      const currentQty = newCart.get(id);
-      newCart.set(id, currentQty + qty);
-    } else {
-      // we dont have this item in cart
-      newCart.set(id, qty);
+    const newCart = { ...cart };
+
+    if (newCart[id] === undefined) {
+      newCart[id] = 0;
     }
+    newCart[id] += qty;
+
     setCartState(newCart);
   };
 
@@ -40,7 +46,7 @@ function ProductInfo() {
   return (
     <div>
       <Helmet>
-        <title>Mariia webshop - {productInfo.title || ""}</title>
+        <title>Webshop - {productInfo.title || ""}</title>
       </Helmet>
       <Paper elevation={4}>
         <Grid container spacing={2}>

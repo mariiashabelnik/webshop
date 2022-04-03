@@ -1,12 +1,16 @@
 import { useRecoilValue, useRecoilState } from "recoil";
 import { cartInfo, cartState } from "../store/index";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import { Link } from "@mui/material";
 import "./Cart.css";
+
+//mui import
+import {
+  Link,
+  TextField,
+  Typography,
+  Button,
+  Paper,
+  Grid,
+} from "@mui/material";
 
 function Cart() {
   const { totalPrice, shoppingCart, totalQty } = useRecoilValue(cartInfo);

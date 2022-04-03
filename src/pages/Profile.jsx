@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { userInformation } from "../store/index";
 import { useRecoilState } from "recoil";
 import { Helmet } from "react-helmet";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+
+//mui import
+import { Paper, Typography, Button } from "@mui/material";
 
 function Profile() {
   const [userInfo, setUserInfo] = useRecoilState(userInformation);
@@ -29,16 +29,17 @@ function Profile() {
   return (
     <div>
       <Helmet>
-        <title>Mariia webshop - Home</title>
+        <title>
+          Webshop - {userInfo.name.firstname || ""}{" "}
+          {userInfo.name.lastname || ""}
+        </title>
       </Helmet>
 
       <Paper elevation={4}>
         <Typography variant="subtitle1">
-          Name: {userInfo.name.firstname}
+          Name: {userInfo.name.firstname} {userInfo.name.lastname}
         </Typography>
-        <Typography variant="subtitle1">
-          Lastname: {userInfo.name.lastname}
-        </Typography>
+
         <Typography variant="subtitle1">Phone: {userInfo.phone}</Typography>
         <Typography variant="subtitle1">
           Address: {userInfo.address.street} {userInfo.address.number},

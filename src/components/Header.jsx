@@ -14,9 +14,10 @@ import Button from "@mui/material/Button";
 
 import ShoppingIcon from "@mui/icons-material/ShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import PersonIcon from "@mui/icons-material/Person";
 
 import { useRecoilValue } from "recoil";
-import { cartInfo, userInformation } from "../store/index";
+import { cartInfo, userInformation, isAdmin } from "../store/index";
 import BallotIcon from "@mui/icons-material/Ballot";
 
 import StorefrontIcon from "@mui/icons-material/Storefront";
@@ -27,7 +28,8 @@ function Header() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { totalPrice, totalQty } = useRecoilValue(cartInfo);
   const userInfo = useRecoilValue(userInformation);
-  console.log(userInfo);
+  const admin = useRecoilValue(isAdmin);
+
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => {
@@ -60,6 +62,24 @@ function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      {admin && (
+        <MenuItem onClick={handleMenuClose}>
+          <IconButton size="large" color="inherit">
+            <PersonIcon />
+          </IconButton>
+          <Link to="/admin">
+            <p> Admin</p>
+          </Link>
+        </MenuItem>
+      )}
+      <MenuItem onClick={handleMenuClose}>
+        <IconButton size="large" color="inherit">
+          <PersonIcon />
+        </IconButton>
+        <Link to={userInfo.id ? "/profil" : "/login"}>
+          <p> {userInfo.id ? "Profile" : "Login"}</p>
+        </Link>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <IconButton size="large" color="inherit">
           <BallotIcon />
@@ -68,7 +88,6 @@ function Header() {
           <p>Products</p>
         </Link>
       </MenuItem>
-
       <MenuItem onClick={handleMenuClose}>
         <IconButton size="large" aria-label={totalQty} color="inherit">
           <Badge badgeContent={totalQty} color="error">
@@ -97,11 +116,18 @@ function Header() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {admin && (
+              <Button color="inherit">
+                <Link to="/admin">Admin</Link>
+              </Button>
+            )}
             <Button color="inherit">
               <Link to="/products">Products</Link>
             </Button>
             <Button color="inherit">
-              <Link to="/login"> {userInfo.id ? "Profile" : "Login"}</Link>
+              <Link to={userInfo.id ? "/profile" : "/login"}>
+                {userInfo.id ? "Profile" : "Login"}
+              </Link>
             </Button>
 
             <IconButton size="large" aria-label={totalQty} color="inherit">
