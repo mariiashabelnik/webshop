@@ -1,4 +1,4 @@
-//här ligger selectorer och atomer = Recoil
+//här ligger alla selectorer och atomer = Recoil
 
 import { atom, selector } from "recoil";
 
@@ -85,6 +85,19 @@ export const isAdmin = selector({
     } else {
       return false;
     }
+  },
+});
+
+export const uniqueCategories = selector({
+  key: "uniqueCategories",
+  get: ({ get }) => {
+    const productList = get(products);
+
+    const uniqueSet = new Set();
+    productList.forEach((item) => {
+      uniqueSet.add(item.category);
+    });
+    return uniqueSet;
   },
 });
 
