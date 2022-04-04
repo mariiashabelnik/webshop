@@ -1,25 +1,25 @@
-import "./Header.css";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { cartInfo, userInformation, isAdmin } from "../store/index";
+import "./Header.css";
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import Button from "@mui/material/Button";
+//mui import
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Badge,
+  MenuItem,
+  Menu,
+  Button,
+} from "@mui/material";
 
 import ShoppingIcon from "@mui/icons-material/ShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import PersonIcon from "@mui/icons-material/Person";
-
-import { useRecoilValue } from "recoil";
-import { cartInfo, userInformation, isAdmin } from "../store/index";
 import BallotIcon from "@mui/icons-material/Ballot";
-
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
 function Header() {

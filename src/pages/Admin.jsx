@@ -100,7 +100,6 @@ const columnsUsers = [
 function Admin() {
   const productList = useRecoilValue(products);
   const userList = useRecoilValue(allUsers);
-  console.log(userList);
 
   return (
     <div>
@@ -108,13 +107,11 @@ function Admin() {
         <title>Webshop - Admin</title>
       </Helmet>
 
-      <Paper elevation={4} sm={{ width: "100%" }} xs={{ width: "100%" }}>
-        <Typography variant="h5" pl={2} pr={2} pt={2}>
-          Admin
-        </Typography>
+      <Paper elevation={4} sm={{ width: "50%" }} xs={{ width: "50%" }}>
         <Typography variant="h5" pl={2} pr={2} pt={2}>
           Products
         </Typography>
+
         <div style={{ height: 600, width: "100%" }}>
           <DataGrid
             rows={productList}
@@ -124,9 +121,13 @@ function Admin() {
             disableSelectionOnClick
           />
         </div>
+      </Paper>
+
+      <Paper elevation={4} sm={{ width: "50%" }} xs={{ width: "50%" }}>
         <Typography variant="h5" pl={2} pr={2} pt={2}>
           Users
         </Typography>
+
         <div style={{ height: 600, width: "100%" }}>
           <DataGrid
             rows={userList}
